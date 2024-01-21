@@ -30,7 +30,6 @@ public class Main {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
             if (args[i].matches("-p")) {//префикс
                 prefix = args[i + 1];
@@ -58,13 +57,12 @@ public class Main {
                     } else list.add(line.trim());
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Что-то не так с входными данными");
             }
         }
 
         if (!listInt.isEmpty()) {
             Path integerFile = Paths.get(argPath + prefix + "integers.txt");
-
             try {
                 if (rewrite) {
                     Files.deleteIfExists(integerFile);
@@ -75,11 +73,10 @@ public class Main {
                             StandardOpenOption.APPEND);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Проблема с выходным файлом integers");
             }
             countStrings(integerFile, infFull);
         }
-
 
         if (!listFlt.isEmpty()) {
             Path floatFile = Paths.get(argPath + prefix + "floats.txt");
@@ -93,7 +90,7 @@ public class Main {
                             StandardOpenOption.APPEND);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Проблема с выходным файлом floats");
             }
             countStrings(floatFile, infFull);
         }
@@ -110,7 +107,7 @@ public class Main {
                             StandardOpenOption.APPEND);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Проблема с выходным файлом strings");
             }
             countStrings(strFile, infFull);
         }
@@ -127,7 +124,7 @@ public class Main {
                 }  list.add(line.trim());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Проблема прочтения файла при подсчете");
         }
 
         if(!isInfFull) System.out.println(path.getFileName() + " include " + list.size() +" string(s)!");
@@ -146,15 +143,14 @@ public class Main {
         }
     }
 
-
     public static boolean isInt(String str) {
         try {
             int v = Integer.parseInt(str);
             return true;
         } catch (NumberFormatException nfe) {
+            System.out.println("Строка не Integer");
         }
         return false;
-
     }
 
     public static boolean IsFloat(String str) {
@@ -162,8 +158,8 @@ public class Main {
             float v = Float.parseFloat(str);
             return true;
         } catch (NumberFormatException nfe) {
+            System.out.println("Строка не Float");
         }
         return false;
     }
-
 }
